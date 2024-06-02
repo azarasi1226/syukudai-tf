@@ -10,10 +10,10 @@ variable "vpc_id" {
   type        = string
 }
 
-variable "port" {
+variable "allow_port" {
   type        = number
 }
 
-variable "cidr_blocks" {
+variable "allow_cidrs" {
   type        = list(string)
 }

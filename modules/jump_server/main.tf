@@ -8,8 +8,8 @@ module "ssh_sg" {
   resource_prefix = var.resource_prefix
   usage_name      = "jump_server"
   vpc_id          = var.vpc_id
-  port            = "22"
-  cidr_blocks     = ["0.0.0.0/0"]
+  allow_port      = "22"
+  allow_cidrs     = ["0.0.0.0/0"]
 }
 
 # memo: ここをlatestにすると、user-dataが使えなくなる可能性があるのでバージョンは固定したほうがよさそう
