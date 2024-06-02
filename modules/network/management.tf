@@ -7,7 +7,6 @@ resource "aws_subnet" "management" {
   tags = {
     Name = "${var.resource_prefix}-management-subnet"
   }
-
 }
 
 resource "aws_route_table" "management" {
