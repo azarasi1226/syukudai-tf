@@ -12,11 +12,11 @@ provider "aws" {
   region  = "ap-northeast-1"
   profile = var.profile
 
-    default_tags {
-        tags = {
-            CreatedBy = "terraform"
-            Environment  = "test"
-            ProjectName = "homework"
-        }
+  default_tags {
+    tags = {
+      CreatedBy   = "terraform"
+      Environment = "test"
+      ProjectName = "homework"
     }
+  }
 }

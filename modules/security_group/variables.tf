@@ -1,19 +1,19 @@
 variable "resource_prefix" {
-  type        = string
+  type = string
 }
 
 variable "usage_name" {
-  type        = string
+  type = string
 }
 
 variable "vpc_id" {
-  type        = string
+  type = string
 }
 
 variable "allow_port" {
-  type        = number
+  type = number
 }
 
 variable "allow_cidrs" {
-  type        = list(string)
+  type = list(string)
 }
