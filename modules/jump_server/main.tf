@@ -12,7 +12,8 @@ module "ssh_sg" {
   allow_cidrs     = ["0.0.0.0/0"]
 }
 
-# memo: ここをlatestにすると、user-dataが使えなくなる可能性があるのでバージョンは固定したほうがよさそう
+# TODO: ここをlatestにすると、Linuxのバージョンアップのせいでuser-dataが使えなくなる可能性があるのでバージョンは固定したほうがよさそう
+# 最新のバージョンに固定して、userdataを更新しよう
 data "aws_ssm_parameter" "this" {
   name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
