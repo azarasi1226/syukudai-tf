@@ -1,9 +1,7 @@
-# SSH Keyの保存先
 locals {
   export_path = "../../export"
 }
 
-# SSH接続用セキュリティグループ
 module "ssh_sg" {
   source = "../../modules/security_group"
 
@@ -14,31 +12,27 @@ module "ssh_sg" {
   cidr_blocks     = ["0.0.0.0/0"]
 }
 
-# amazonlinux2の最新amiを取得
+# memo: ここをlatestにすると、user-dataが使えなくなる可能性があるのでバージョンは固定したほうがよさそう
 data "aws_ssm_parameter" "this" {
   name = "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2"
 }
 
-# SSH Key
 resource "tls_private_key" "this" {
   algorithm = "RSA"
   rsa_bits  = 4096
 }
 
-# Key Pair
 resource "aws_key_pair" "this" {
   key_name   = "jump-server-key2"
   public_key = tls_private_key.this.public_key_openssh
 }
 
-# ローカルにprivate Key出力
 resource "local_file" "private_key" {
   filename        = "${local.export_path}/jump-server-key.pem"
   content         = tls_private_key.this.private_key_pem
   file_permission = "600"
 }
 
-# 踏み台サーバー
 resource "aws_instance" "this" {
   ami                    = data.aws_ssm_parameter.this.value
   instance_type          = "t2.micro"
@@ -52,7 +46,6 @@ resource "aws_instance" "this" {
   }
 }
 
-# SSH接続しやすくするためのお助けコマンドファイル出力
 resource "local_file" "example_command" {
   filename = "${local.export_path}/ssh-hint.txt"
   content  = "ssh -i jump-server-key.pem ec2-user@${aws_instance.this.public_dns}"
