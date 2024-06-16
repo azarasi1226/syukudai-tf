@@ -4,7 +4,7 @@ data "aws_iam_policy_document" "deploy" {
     effect    = "Allow"
     resources = ["*"]
     actions = [
-      "ecs:DescribeServices"
+      "*"
     ]
   }
 }

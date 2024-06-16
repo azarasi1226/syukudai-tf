@@ -12,7 +12,7 @@ data "aws_iam_policy_document" "ecs_task_execution" {
     effect    = "Allow"
     resources = ["*"]
     actions = [
-      "logs:CreateLogGroup"
+      "*"
     ]
   }
 }
@@ -33,7 +33,7 @@ data "aws_iam_policy_document" "ecs_task" {
     effect    = "Allow"
     resources = ["*"]
     actions = [
-      "logs:CreateLogGroup"
+      "*"
     ]
   }
 }
