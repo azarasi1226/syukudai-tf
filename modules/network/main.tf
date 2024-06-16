@@ -32,10 +32,8 @@ resource "aws_eip" "this" {
   }
 }
 
-# NAT Gatewayは初期セットアップの時にしか使用しない = ALBのような常用ではないので、
-# 冗長化は取らず、1AZのみのとする。
 resource "aws_nat_gateway" "this" {
-  subnet_id     = aws_subnet.ingress[0].id
+  subnet_id     = aws_subnet.management.id
   allocation_id = aws_eip.this.id
 
   tags = {

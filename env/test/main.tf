@@ -23,3 +23,20 @@ module "jump_server" {
   vpc_id          = module.network.vpc_id
   subnet_id       = module.network.management_subnet_id
 }
+
+module "nlb" {
+  source = "../../modules/nlb"
+
+  resource_prefix = var.resource_prefix
+  subnet_ids = module.network.ingress_subnet_ids
+  vpc_id = module.network.vpc_id
+}
+
+module "ecs" {
+  source = "../../modules/ecs"
+
+  resource_prefix = var.resource_prefix
+  subnet_ids = module.network.private_subnet_ids
+  vpc_id = module.network.vpc_id
+  container_port = 80
+}
