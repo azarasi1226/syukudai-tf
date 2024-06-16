@@ -24,9 +24,10 @@ resource "aws_ecs_task_definition" "this" {
   cpu                      = "256"
   memory                   = "512"
 
-  container_definitions = templatefile("${path.module}/task.json", {
-    service_name = local.container_name,
-    image_url    = aws_ecr_repository.this.repository_url
+  container_definitions = templatefile("${path.module}/task_definition.json", {
+    container_name = local.container_name,
+    container_port = var.container_port,
+    image_url    = "nginx:latest"
   })
 
   task_role_arn      = module.ecs_task_role.iam_role_arn
@@ -54,7 +55,7 @@ resource "aws_ecs_service" "this" {
   }
 
   load_balancer {
-    target_group_arn = module.alb.blue_targetgroup_arn
+    target_group_arn = var.blue_targetgroup_arn
     container_name   = local.container_name
     container_port   = var.container_port
   }

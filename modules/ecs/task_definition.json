@@ -6,7 +6,7 @@
         "portMappings": [
             {
                 "protocol": "tcp",
-                "containerPort": "${container_port}"
+                "containerPort": ${container_port}
             }
         ],
         "logConfiguration": {

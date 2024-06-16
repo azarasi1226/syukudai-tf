@@ -14,5 +14,29 @@ variable "subnet_ids" {
 }
 
 variable "container_port" {
+    type = number
+}
+
+variable "blue_targetgroup_arn" {
     type = string
+}
+
+variable "prod_listener_arn" {
+  description = "本番環境のlisner arn"
+  type        = string
+}
+
+variable "test_listener_arn" {
+  description = "テスト環境のlisner arn"
+  type        = string
+}
+
+variable "blue_targetgroup_name" {
+  description = "blueTargetGroup"
+  type        = string
+}
+
+variable "green_targetgroup_name" {
+  description = "greenTargetGroup"
+  type        = string
 }

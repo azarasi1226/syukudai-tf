@@ -39,4 +39,10 @@ module "ecs" {
   subnet_ids = module.network.private_subnet_ids
   vpc_id = module.network.vpc_id
   container_port = 80
+  blue_targetgroup_arn = module.nlb.blue_targetgroup_arn
+
+  prod_listener_arn      = module.nlb.prod_listener_arn
+  test_listener_arn      = module.nlb.test_listener_arn
+  blue_targetgroup_name  = module.nlb.blue_targetgroup_name
+  green_targetgroup_name = module.nlb.green_targetgroup_name
 }
