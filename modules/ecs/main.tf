@@ -27,7 +27,7 @@ resource "aws_ecs_task_definition" "this" {
   container_definitions = templatefile("${path.module}/task_definition.json", {
     container_name = local.container_name,
     container_port = var.container_port,
-    image_url    = "nginx:latest"
+    image_url    = aws_ecr_repository.this.repository_url
   })
 
   task_role_arn      = module.ecs_task_role.iam_role_arn
@@ -65,6 +65,6 @@ resource "aws_ecs_service" "this" {
   }
 
   lifecycle {
-    ignore_changes = [task_definition]
+    ignore_changes = [task_definition, load_balancer]
   }
 }

@@ -2,10 +2,24 @@
 data "aws_iam_policy_document" "deploy" {
   statement {
     effect    = "Allow"
-    resources = ["*"]
     actions = [
-      "*"
+      "elasticloadbalancing:DescribeRules",
+      "elasticloadbalancing:DescribeListeners",
+      "elasticloadbalancing:DescribeTargetGroups",
+      "elasticloadbalancing:DescribeTargetGroups",
+      "elasticloadbalancing:ModifyListener",
+      "ecs:DescribeServices",
+      "ecs:DeleteTaskSet",
+      "ecs:UpdateServicePrimaryTaskSet",
+      "ecs:CreateTaskSet"
     ]
+    resources = ["*"]
+  }
+
+  statement {
+    effect = "Allow"
+    actions = ["iam:PassRole"]
+    resources = ["*"]
   }
 }
 
