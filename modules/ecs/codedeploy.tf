@@ -11,7 +11,8 @@ data "aws_iam_policy_document" "deploy" {
       "ecs:DescribeServices",
       "ecs:DeleteTaskSet",
       "ecs:UpdateServicePrimaryTaskSet",
-      "ecs:CreateTaskSet"
+      "ecs:CreateTaskSet",
+      "s3:*"
     ]
     resources = ["*"]
   }
