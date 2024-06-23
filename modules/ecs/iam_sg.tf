@@ -10,7 +10,7 @@ data "aws_iam_policy_document" "ecs_task_execution" {
 
   statement {
     effect    = "Allow"
-    resources = ["CreateLogStream"]
+    resources = ["*"]
     actions = [
       "*"
     ]
